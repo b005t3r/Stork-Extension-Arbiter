@@ -11,8 +11,8 @@ import stork.arbiter.state.StateNode;
 use namespace arbiter_internal;
 
 public class ChangeStatePhase extends ExecutionPhase {
-    internal var oldState:StateNode = null;
-    internal var newState:StateNode = null;
+    arbiter_internal var oldState:StateNode = null;
+    arbiter_internal var newState:StateNode = null;
 
     private var eventSent:Boolean = false;
 
@@ -20,13 +20,7 @@ public class ChangeStatePhase extends ExecutionPhase {
         if(! eventSent) {
             eventSent = true;
 
-            arbiter.willSwitchStateEvent.currentState = oldState;
-            arbiter.willSwitchStateEvent.newState = newState;
-
-            arbiter.dispatchEvent(arbiter.willSwitchStateEvent);
-
-            arbiter.willSwitchStateEvent.currentState = null;
-            arbiter.willSwitchStateEvent.newState = null;
+            arbiter.dispatchEvent(arbiter.willSwitchStateEvent.resetEvent(oldState, newState));
         }
 
         if(arbiter.isStopped())

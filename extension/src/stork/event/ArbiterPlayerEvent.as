@@ -19,10 +19,7 @@ public class ArbiterPlayerEvent extends ArbiterEvent {
     }
 
     public function get request():Request { return _request; }
-    public function set request(value:Request):void { _request = value; }
-
     public function get player():PlayerNode { return _player; }
-    public function set player(value:PlayerNode):void { _player = value; }
 
     public function resetEvent(player:PlayerNode, request:Request):ArbiterPlayerEvent {
         _player = player;

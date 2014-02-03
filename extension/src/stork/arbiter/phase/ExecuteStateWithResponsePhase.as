@@ -11,7 +11,7 @@ import stork.arbiter.request.Request;
 use namespace arbiter_internal;
 
 public class ExecuteStateWithResponsePhase extends ExecuteStatePhase {
-    internal var response:Request = null;
+    arbiter_internal var response:Request = null;
 
     override arbiter_internal function deactivate():void {
         response = null;
@@ -25,9 +25,7 @@ public class ExecuteStateWithResponsePhase extends ExecuteStatePhase {
 
         var result:* = state.executeWithResponse();
 
-        arbiter.didExecuteStateWithResponseEvent.currentState = state;
-        arbiter.dispatchEvent(arbiter.didExecuteStateWithResponseEvent);
-        arbiter.didExecuteStateWithResponseEvent.currentState = null;
+        arbiter.dispatchEvent(arbiter.didExecuteStateWithResponseEvent.resetEvent(state, null));
 
         state.arbiter = null;
         state.request = null;

@@ -19,10 +19,7 @@ public class ArbiterStateEvent extends ArbiterEvent {
     }
 
     public function get currentState():StateNode { return _currentState; }
-    public function set currentState(value:StateNode):void { _currentState = value; }
-
     public function get newState():StateNode { return _newState; }
-    public function set newState(value:StateNode):void { _newState = value; }
 
     public function resetEvent(currentState:StateNode, newState:StateNode):ArbiterStateEvent {
         _currentState = currentState;

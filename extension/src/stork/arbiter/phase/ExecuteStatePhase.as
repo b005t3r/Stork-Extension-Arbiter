@@ -31,9 +31,7 @@ public class ExecuteStatePhase extends ExecutionPhase {
 
         var response:* = state.execute();
 
-        arbiter.didExecuteStateEvent.currentState = state;
-        arbiter.dispatchEvent(arbiter.didExecuteStateEvent);
-        arbiter.didExecuteStateEvent.currentState = null;
+        arbiter.dispatchEvent(arbiter.didExecuteStateEvent.resetEvent(state, null));
 
         state.arbiter = null;
 

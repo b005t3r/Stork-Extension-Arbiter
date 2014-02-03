@@ -21,14 +21,6 @@ public class AsyncArbiterNode extends ArbiterNode {
         addEventListener(Event.REMOVED_FROM_SCENE, onRemovedFromScene);
     }
 
-    private function onAddedToScene(event:Event):void { addEventListener(SceneStepEvent.STEP, onStep); }
-    private function onRemovedFromScene(event:Event):void { removeEventListener(SceneStepEvent.STEP, onStep); }
-
-    private function onStep(event:SceneStepEvent):void {
-        if(shouldExecuteNextPhase())
-            runExecutionLoop(_activePhase);
-    }
-
     override public function beginExecution():void {
         _running = true;
         _paused = false;
@@ -59,6 +51,14 @@ public class AsyncArbiterNode extends ArbiterNode {
 
     override protected function shouldExecuteNextPhase():Boolean {
         return ! _paused && super.shouldExecuteNextPhase();
+    }
+
+    private function onAddedToScene(event:Event):void { sceneNode.addEventListener(SceneStepEvent.STEP, onStep); }
+    private function onRemovedFromScene(event:Event):void { sceneNode.removeEventListener(SceneStepEvent.STEP, onStep); }
+
+    private function onStep(event:SceneStepEvent):void {
+        if(shouldExecuteNextPhase())
+            runExecutionLoop(_activePhase);
     }
 }
 }

@@ -12,20 +12,18 @@ import stork.arbiter.request.Request;
 use namespace arbiter_internal;
 
 public class SendRequestPhase extends ExecutionPhase {
-    internal var request:Request        = null;
+    arbiter_internal var request:Request    = null;
 
-    private var response:*              = null;
+    private var response:*                  = null;
 
-    private var willEventSent:Boolean   = false;
-    private var didEventSent:Boolean    = false;
+    private var willEventSent:Boolean       = false;
+    private var didEventSent:Boolean        = false;
 
     override arbiter_internal function run(arbiter:ArbiterNode):ExecutionPhase {
         if(! willEventSent) {
             willEventSent = true;
 
-            arbiter.willSendRequestEvent.request = request;
-            arbiter.dispatchEvent(arbiter.willSendRequestEvent);
-            arbiter.willSendRequestEvent.request = null;
+            arbiter.dispatchEvent(arbiter.willSendRequestEvent.resetEvent(request.player, request));
         }
 
         if(arbiter.isStopped())
@@ -64,11 +62,7 @@ public class SendRequestPhase extends ExecutionPhase {
         if(! didEventSent) {
             didEventSent = true;
 
-            arbiter.didSendRequestEvent.request = response as Request;
-            arbiter.didSendRequestEvent.player = request.player;
-            arbiter.dispatchEvent(arbiter.didSendRequestEvent);
-            arbiter.didSendRequestEvent.request = null;
-            arbiter.didSendRequestEvent.player = null;
+            arbiter.dispatchEvent(arbiter.didSendRequestEvent.resetEvent(request.player, response));
         }
 
         if(arbiter.isStopped())
