@@ -43,7 +43,7 @@ public class StateContainer extends ContainerNode {
     private function onChildAdded(event:Event):void {
         var child:Node = event.target as Node;
 
-        if(child != null && child.parentNode == this && child is StateNode == false)
+        if(child.parentNode == this && child is StateNode == false)
             throw new TypeError("StateContainer can only hold StateNodes");
     }
 }

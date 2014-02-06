@@ -25,7 +25,7 @@ public class PlayerContainer extends ContainerNode {
     private function onChildAdded(event:Event):void {
         var child:Node = event.target as Node;
 
-        if(child != null && child.parentNode == this && child is PlayerNode == false)
+        if(child.parentNode == this && child is PlayerNode == false)
             throw new TypeError("PlayerContainer can only hold PlayerNodes");
     }
 }
