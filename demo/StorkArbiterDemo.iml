@@ -2,7 +2,7 @@
 <module type="Flex" version="4">
   <component name="FlexBuildConfigurationManager" active="StorkArbiterDemo">
     <configurations>
-      <configuration name="StorkArbiterDemo" target-platform="Desktop" pure-as="true" main-class="Main" output-file="Main.swf" output-folder="$MODULE_DIR$/out">
+      <configuration name="StorkArbiterDemo" target-platform="Desktop" pure-as="true" main-class="LocalGameMain" output-file="Main.swf" output-folder="$MODULE_DIR$/out">
         <dependencies target-player="12.0">
           <entries>
             <entry module-name="Starling" build-configuration-name="Starling">

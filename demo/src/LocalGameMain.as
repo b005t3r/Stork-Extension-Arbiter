@@ -20,10 +20,10 @@ import stork.event.SceneEvent;
 import stork.starling.StarlingPlugin;
 
 [SWF(width="320", height="380", backgroundColor="#666666", frameRate="60")]
-public class Main extends Sprite {
+public class LocalGameMain extends Sprite {
     private var scene:SceneNode;
 
-    public function Main() {
+    public function LocalGameMain() {
         scene = new SceneNode("Demo Scene");
 
         var starlingPlugin:StarlingPlugin = new StarlingPlugin(Root, this);
