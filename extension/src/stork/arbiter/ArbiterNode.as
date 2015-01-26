@@ -17,9 +17,9 @@ import stork.arbiter.state.StateNode;
 import stork.core.Node;
 import stork.error.ArbiterIllegalStopError;
 import stork.error.SynchronousArbiterError;
-import stork.event.Event;
 import stork.event.ArbiterPlayerEvent;
 import stork.event.ArbiterStateEvent;
+import stork.event.Event;
 
 use namespace arbiter_internal;
 
