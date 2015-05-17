@@ -15,7 +15,7 @@ import starling.events.TouchEvent;
 import starling.events.TouchPhase;
 
 import stork.arbiter.ArbiterNode;
-import stork.arbiter.state.StateContainer;
+import stork.arbiter.state.StateContainerNode;
 import stork.core.Node;
 import stork.core.SceneNode;
 import stork.event.ArbiterStateEvent;
@@ -66,7 +66,7 @@ public class GameRestarterNode extends Node {
         var scene:SceneNode = sceneNode;
 
         var gameModel:GameModelNode = scene.getNodeByName("GameModel") as GameModelNode;
-        var states:StateContainer   = scene.getNodeByName("StateContainer") as StateContainer;
+        var states:StateContainerNode   = scene.getNodeByName("StateContainer") as StateContainerNode;
 
         states.popState(); // remove GameFinishedStateComponent
 

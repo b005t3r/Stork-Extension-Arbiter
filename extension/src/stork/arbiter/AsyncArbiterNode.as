@@ -14,7 +14,7 @@ use namespace arbiter_internal;
 public class AsyncArbiterNode extends ArbiterNode {
     protected var _paused:Boolean = false;
 
-    public function AsyncArbiterNode(name:String = "Async Arbiter") {
+    public function AsyncArbiterNode(name:String = "AsyncArbiter") {
         super(name);
 
         addEventListener(Event.ADDED_TO_SCENE, onAddedToScene);

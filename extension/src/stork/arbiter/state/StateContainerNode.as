@@ -8,8 +8,8 @@ import stork.core.ContainerNode;
 import stork.core.Node;
 import stork.event.Event;
 
-public class StateContainer extends ContainerNode {
-    public function StateContainer(name:String = "StateContainer") {
+public class StateContainerNode extends ContainerNode {
+    public function StateContainerNode(name:String = "StateContainer") {
         super(name);
 
         addEventListener(Event.ADDED_TO_PARENT, onChildAdded);

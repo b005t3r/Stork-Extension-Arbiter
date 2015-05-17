@@ -9,12 +9,13 @@ import stork.arbiter.phase.ExecuteStatePhase;
 import stork.arbiter.phase.ExecuteStateWithResponsePhase;
 import stork.arbiter.phase.ExecutionPhase;
 import stork.arbiter.phase.SendRequestPhase;
-import stork.arbiter.player.PlayerContainer;
+import stork.arbiter.player.PlayerContainerNode;
 import stork.arbiter.player.PlayerNode;
 import stork.arbiter.request.Request;
-import stork.arbiter.state.StateContainer;
+import stork.arbiter.state.StateContainerNode;
 import stork.arbiter.state.StateNode;
 import stork.core.Node;
+import stork.core.reference.LocalReference;
 import stork.error.ArbiterIllegalStopError;
 import stork.error.SynchronousArbiterError;
 import stork.event.ArbiterPlayerEvent;
@@ -30,8 +31,8 @@ public class ArbiterNode extends Node {
     protected static var STOP_EXECUTION_RESPONSE:String                         = "stopExecutionResponse";
     protected static var PAUSE_EXECUTION_RESPONSE:String                        = "pauseExecutionResponse";
 
-    protected var _players:PlayerContainer                                      = null;
-    protected var _states:StateContainer                                        = null;
+    protected var _players:PlayerContainerNode                                      = null;
+    protected var _states:StateContainerNode                                        = null;
 
     protected var _dispatchingEvents:Boolean                                    = false;
 
@@ -50,15 +51,17 @@ public class ArbiterNode extends Node {
 
     protected var _activePhase:ExecutionPhase = null;
 
-    public function ArbiterNode(name:String = "Basic Arbiter") {
+    public function ArbiterNode(name:String = "BasicArbiter") {
         super(name);
     }
 
-    public function set players(value:PlayerContainer):void { _players = value; }
-    public function get players():PlayerContainer { return _players; }
+    [LocalReference("@PlayerContainerNode")]
+    public function set players(value:PlayerContainerNode):void { _players = value; }
+    public function get players():PlayerContainerNode { return _players; }
 
-    public function set states(value:StateContainer):void { _states = value; }
-    public function get states():StateContainer { return _states; }
+    [LocalReference("@StateContainerNode")]
+    public function set states(value:StateContainerNode):void { _states = value; }
+    public function get states():StateContainerNode { return _states; }
 
     public function beginExecution():void {
         _running = true;

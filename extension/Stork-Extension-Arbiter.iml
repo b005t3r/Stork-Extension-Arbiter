@@ -8,9 +8,6 @@
             <entry module-name="Stork-Framework" build-configuration-name="Stork-Framework">
               <dependency linkage="Merged" />
             </entry>
-            <entry module-name="as3corelib" build-configuration-name="as3corelib">
-              <dependency linkage="Merged" />
-            </entry>
           </entries>
           <sdk name="AIR SDK 4.0" />
         </dependencies>
@@ -34,7 +31,6 @@
     <orderEntry type="jdk" jdkName="AIR SDK 4.0" jdkType="Flex SDK Type (new)" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="Stork-Framework" exported="" />
-    <orderEntry type="module" module-name="as3corelib" exported="" />
   </component>
 </module>
 

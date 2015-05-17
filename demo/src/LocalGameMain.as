@@ -11,9 +11,9 @@ import demo.model.GameModelNode;
 import flash.display.Sprite;
 
 import stork.arbiter.AsyncArbiterNode;
-import stork.arbiter.player.PlayerContainer;
+import stork.arbiter.player.PlayerContainerNode;
 import stork.arbiter.player.PluggablePlayerNode;
-import stork.arbiter.state.StateContainer;
+import stork.arbiter.state.StateContainerNode;
 
 import stork.core.SceneNode;
 import stork.event.SceneEvent;
@@ -35,8 +35,8 @@ public class LocalGameMain extends Sprite {
         scene.addNode(new InfoDisplayRefresherNode());
 
         var arbiter:AsyncArbiterNode        = new AsyncArbiterNode("MainArbiter");
-        var states:StateContainer           = new StateContainer();
-        var players:PlayerContainer         = new PlayerContainer();
+        var states:StateContainerNode       = new StateContainerNode();
+        var players:PlayerContainerNode     = new PlayerContainerNode();
         var playerOne:PluggablePlayerNode   = new PluggablePlayerNode("PlayerOne");
         var playerTwo:PluggablePlayerNode   = new PluggablePlayerNode("PlayerTwo");
 
@@ -47,8 +47,9 @@ public class LocalGameMain extends Sprite {
 
         states.pushState(new GameStateNode());
 
-        arbiter.players = players;
-        arbiter.states  = states;
+        // TODO: change to use local reference
+        //arbiter.players = players;
+        //arbiter.states  = states;
 
         scene.addNode(arbiter);
         scene.addNode(players);

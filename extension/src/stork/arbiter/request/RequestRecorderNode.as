@@ -4,7 +4,7 @@
  * Time: 11:28
  */
 package stork.arbiter.request {
-import com.adobe.serialization.json.JSON;
+import medkit.object.ObjectOutputStream;
 
 import stork.arbiter.ArbiterNode;
 import stork.core.Node;
@@ -14,9 +14,9 @@ import stork.event.RequestRecorderEvent;
 public class RequestRecorderNode extends Node {
     protected var _requestRecordedEvent:RequestRecorderEvent = new RequestRecorderEvent(RequestRecorderEvent.REQUEST_RECORDED);
 
-    protected var _arbiter:ArbiterNode  = null;
-    protected var _requests:Object      = {};
-    protected var _requestIndex:int     = 0;
+    protected var _arbiter:ArbiterNode              = null;
+    protected var _requests:Object                  = {};
+    protected var _requestIndex:int                 = 0;
 
     public function RequestRecorderNode(name:String = "RequestRecorderNode") {
         super(name);
@@ -34,7 +34,10 @@ public class RequestRecorderNode extends Node {
     }
 
     public function encodeRecordedRequests():String {
-        return com.adobe.serialization.json.JSON.encode(_requests);
+        var oos:ObjectOutputStream = new ObjectOutputStream();
+        oos.writeObject(_requests, "requests");
+
+        return oos.saveToJSONString();
     }
 
     protected function onRequestProcessed(event:ArbiterPlayerEvent):void {
