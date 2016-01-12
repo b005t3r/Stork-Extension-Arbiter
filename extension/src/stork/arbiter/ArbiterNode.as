@@ -55,11 +55,11 @@ public class ArbiterNode extends Node {
         super(name);
     }
 
-    [LocalReference("@PlayerContainerNode")]
+    [LocalReference("@stork.arbiter.player::PlayerContainerNode")]
     public function set players(value:PlayerContainerNode):void { _players = value; }
     public function get players():PlayerContainerNode { return _players; }
 
-    [LocalReference("@StateContainerNode")]
+    [LocalReference("@stork.arbiter.state::StateContainerNode")]
     public function set states(value:StateContainerNode):void { _states = value; }
     public function get states():StateContainerNode { return _states; }
 
