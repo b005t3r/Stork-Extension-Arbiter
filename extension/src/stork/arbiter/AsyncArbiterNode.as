@@ -12,7 +12,7 @@ import stork.event.SceneStepEvent;
 use namespace arbiter_internal;
 
 public class AsyncArbiterNode extends ArbiterNode {
-    protected var _paused:Boolean = false;
+    protected var _pausedCount:int = 0;
 
     public function AsyncArbiterNode(name:String = "AsyncArbiter") {
         super(name);
@@ -23,7 +23,7 @@ public class AsyncArbiterNode extends ArbiterNode {
 
     override public function beginExecution():void {
         _running = true;
-        _paused = false;
+        _pausedCount = 0;
 
         executeStatePhase.state = states.currentState;
         _activePhase = executeStatePhase;
@@ -31,26 +31,31 @@ public class AsyncArbiterNode extends ArbiterNode {
         // runExecutionLoop() will be called on next step() call
     }
 
-    override public function isPaused():Boolean { return _paused; }
+    override public function isPaused():Boolean { return _pausedCount > 0; }
 
     override public function pauseExecution():void {
         if(! _dispatchingEvents)
             throw new ArbiterIllegalPauseError();
 
-        _paused = true;
+        ++_pausedCount;
     }
 
     override public function resumeExecution():void {
         if(_dispatchingEvents)
             throw new ArbiterIllegalResumeError();
 
-        _paused = false;
+        if(_pausedCount == 0)
+            throw new ArbiterIllegalResumeError("arbiter already resumed, pausedCount == 0");
+
+        --_pausedCount;
     }
 
-    override arbiter_internal function internalPause():void { _paused = true; }
+    override arbiter_internal function internalPause():void {
+        ++_pausedCount;
+    }
 
     override protected function shouldExecuteNextPhase():Boolean {
-        return ! _paused && super.shouldExecuteNextPhase();
+        return _pausedCount == 0 && super.shouldExecuteNextPhase();
     }
 
     private function onAddedToScene(event:Event):void { sceneNode.addEventListener(SceneStepEvent.STEP, onStep); }
