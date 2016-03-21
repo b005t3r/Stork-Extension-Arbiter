@@ -41,8 +41,9 @@ public class AsyncArbiterNode extends ArbiterNode {
     }
 
     override public function resumeExecution():void {
-        if(_dispatchingEvents)
-            throw new ArbiterIllegalResumeError();
+        // not sure if this ever made sense - it doesn't break anything to resume while dispatching events
+//        if(_dispatchingEvents)
+//            throw new ArbiterIllegalResumeError();
 
         if(_pausedCount == 0)
             throw new ArbiterIllegalResumeError("arbiter already resumed, pausedCount == 0");
