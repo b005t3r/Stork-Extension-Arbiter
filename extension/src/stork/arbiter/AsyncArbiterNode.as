@@ -34,8 +34,9 @@ public class AsyncArbiterNode extends ArbiterNode {
     override public function isPaused():Boolean { return _pausedCount > 0; }
 
     override public function pauseExecution():void {
-        if(! _dispatchingEvents)
-            throw new ArbiterIllegalPauseError();
+        // not sure if this ever made sense - it doesn't break anything to pause while dispatching events
+//        if(! _dispatchingEvents)
+//            throw new ArbiterIllegalPauseError();
 
         ++_pausedCount;
     }
