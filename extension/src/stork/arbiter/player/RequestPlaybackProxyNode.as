@@ -15,6 +15,8 @@ public class RequestPlaybackProxyNode extends PlayerNode {
 
         _recorder   = recorder;
         _player     = player;
+
+        addNode(_player);
     }
 
     override public function get arbiter():ArbiterNode { return _player.arbiter; }
