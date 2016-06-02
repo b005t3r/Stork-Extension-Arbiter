@@ -15,7 +15,8 @@ import stork.event.ArbiterPlayerEvent;
 import stork.event.RequestRecorderEvent;
 
 public class RequestRecorderNode extends Node {
-    protected var _requestRecordedEvent:RequestRecorderEvent = new RequestRecorderEvent(RequestRecorderEvent.REQUEST_RECORDED);
+    protected var _requestPlayedBackEvent:RequestRecorderEvent  = new RequestRecorderEvent(RequestRecorderEvent.REQUEST_PLAYED_BACK);
+    protected var _requestRecordedEvent:RequestRecorderEvent    = new RequestRecorderEvent(RequestRecorderEvent.REQUEST_RECORDED);
 
     protected var _arbiter:ArbiterNode              = null;
     protected var _requests:Object                  = { "requestCount" : 0 };
@@ -74,6 +75,8 @@ public class RequestRecorderNode extends Node {
         // playback
         if(playbackActive) {
             _requestIndex++;
+
+            dispatchEvent(_requestPlayedBackEvent.resetEvent(_requestIndex - 1, event.player.name, event.request));
             trace("playback:", _requestIndex - 1, event.player.name, event.request);
         }
         // recording

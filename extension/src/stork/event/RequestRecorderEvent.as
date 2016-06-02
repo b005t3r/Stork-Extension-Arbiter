@@ -8,7 +8,8 @@ import stork.arbiter.request.Request;
 import stork.arbiter.request.RequestRecorderNode;
 
 public class RequestRecorderEvent extends Event {
-    public static const REQUEST_RECORDED:String = "requestRecordedEvent";
+    public static const REQUEST_RECORDED:String     = "requestRecordedEvent";
+    public static const REQUEST_PLAYED_BACK:String  = "requestPlayerBackEvent";
 
     private var _requestIndex:int = -1;
     private var _playerName:String;
