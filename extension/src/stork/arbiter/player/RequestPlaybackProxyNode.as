@@ -7,8 +7,8 @@ import stork.arbiter.request.Request;
 import stork.arbiter.request.RequestRecorderNode;
 
 public class RequestPlaybackProxyNode extends PlayerNode {
-    private var _recorder:RequestRecorderNode;
-    private var _player:PlayerNode;
+    protected var _recorder:RequestRecorderNode;
+    protected var _player:PlayerNode;
 
     public function RequestPlaybackProxyNode(recorder:RequestRecorderNode, player:PlayerNode) {
         super(player.name);
