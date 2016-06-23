@@ -26,7 +26,8 @@ public class PluggablePlayerNode extends PlayerNode {
 
     override public function processRequest():* {
         var count:int = nodeCount;
-        while(true) {
+        var maximumIterations:int = 10000;
+        while(--maximumIterations > 0) {
             for (var i:int = 0; i < count; ++ i) {
                 var plugin:PlayerPluginNode = getNodeAt(i) as PlayerPluginNode;
 
@@ -60,6 +61,9 @@ public class PluggablePlayerNode extends PlayerNode {
                 return response;
             }
         }
+
+        if(maximumIterations == 0)
+            throw new Error("infinite loop detected - no plugin can handle the request");
     }
 
     private function onChildAdded(event:Event):void {
