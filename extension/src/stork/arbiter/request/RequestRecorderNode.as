@@ -4,6 +4,7 @@
  * Time: 11:28
  */
 package stork.arbiter.request {
+import medkit.collection.ArrayUtil;
 import medkit.object.ObjectInputStream;
 import medkit.object.ObjectOutputStream;
 
@@ -69,6 +70,40 @@ public class RequestRecorderNode extends Node {
         }
 
         throw new ArgumentError("request for index " + _requestIndex + " not found for player '" + player.name + "'");
+    }
+
+    public function trimLastRequests(count:int):void {
+        if(count > _requests.requestCount)
+            count = _requests.requestCount;
+
+        _requests.requestCount -= count;
+
+        if(_requestIndex >= _requests.requestCount)
+            _requestIndex = _requests.requestCount;
+
+        for(var playerName:String in _requests) {
+            if(! _requests.hasOwnProperty(playerName) || playerName == "requestCount")
+                continue;
+
+            var playerRequests:Array = _requests[playerName];
+
+            var reqCount:int = playerRequests.length;
+            for (var i:int = 0; i < reqCount; ++i) {
+                var requestWrapper:Object = playerRequests[i];
+
+                if(requestWrapper.index < _requests.requestCount)
+                    continue;
+
+                var numMoved:int = reqCount - i - 1;
+
+                if(numMoved > 0)
+                    ArrayUtil.arrayCopy(playerRequests, i + 1, playerRequests, i, numMoved);
+
+                --reqCount;
+            }
+
+            playerRequests.length = reqCount;
+        }
     }
 
     protected function onRequestProcessed(event:ArbiterPlayerEvent):void {
