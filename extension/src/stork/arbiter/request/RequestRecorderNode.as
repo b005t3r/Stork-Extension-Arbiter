@@ -40,6 +40,7 @@ public class RequestRecorderNode extends Node {
     }
 
     public function get playbackActive():Boolean { return _requestIndex < _requests.requestCount; }
+    public function get requestIndex():int { return _requestIndex; }
 
     public function createPlaybackProxy(player:PlayerNode):RequestPlaybackProxyNode {
         return new RequestPlaybackProxyNode(this, player);

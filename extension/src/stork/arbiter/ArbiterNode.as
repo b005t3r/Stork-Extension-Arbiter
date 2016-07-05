@@ -25,18 +25,18 @@ import stork.event.Event;
 use namespace arbiter_internal;
 
 public class ArbiterNode extends Node {
-    protected static var STOP_EXECUTION_RESULT:String                           = "stopExecutionResult";
-    protected static var EXECUTE_CURRENT_STATE_RESULT:String                    = "executeCurrentState";
-    protected static var EXECUTE_PREVIOUS_STATE_RESULT:String                   = "executePreviousState";
-    protected static var STOP_EXECUTION_RESPONSE:String                         = "stopExecutionResponse";
-    protected static var PAUSE_EXECUTION_RESPONSE:String                        = "pauseExecutionResponse";
+    protected static var STOP_EXECUTION_RESULT:String                                   = "stopExecutionResult";
+    protected static var EXECUTE_CURRENT_STATE_RESULT:String                            = "executeCurrentState";
+    protected static var EXECUTE_PREVIOUS_STATE_RESULT:String                           = "executePreviousState";
+    protected static var STOP_EXECUTION_RESPONSE:String                                 = "stopExecutionResponse";
+    protected static var PAUSE_EXECUTION_RESPONSE:String                                = "pauseExecutionResponse";
 
-    protected var _players:PlayerContainerNode                                      = null;
-    protected var _states:StateContainerNode                                        = null;
+    protected var _players:PlayerContainerNode                                          = null;
+    protected var _states:StateContainerNode                                            = null;
 
-    protected var _dispatchingEvents:Boolean                                    = false;
+    protected var _dispatchingEvents:Boolean                                            = false;
 
-    arbiter_internal var _running:Boolean                                       = false;
+    arbiter_internal var _running:Boolean                                               = false;
 
     arbiter_internal var willSwitchStateEvent:ArbiterStateEvent                         = new ArbiterStateEvent(ArbiterStateEvent.WILL_SWITCH_STATE);
     arbiter_internal var didExecuteStateEvent:ArbiterStateEvent                         = new ArbiterStateEvent(ArbiterStateEvent.DID_EXECUTE_STATE);
@@ -49,7 +49,7 @@ public class ArbiterNode extends Node {
     arbiter_internal var changeStatePhase:ChangeStatePhase                              = new ChangeStatePhase();
     arbiter_internal var sendRequestPhase:SendRequestPhase                              = new SendRequestPhase();
 
-    protected var _activePhase:ExecutionPhase = null;
+    arbiter_internal var _activePhase:ExecutionPhase                                    = null;
 
     public function ArbiterNode(name:String = "BasicArbiter") {
         super(name);

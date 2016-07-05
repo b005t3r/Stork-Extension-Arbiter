@@ -4,7 +4,6 @@
  * Time: 17:25
  */
 package stork.arbiter {
-import stork.error.ArbiterIllegalPauseError;
 import stork.error.ArbiterIllegalResumeError;
 import stork.event.Event;
 import stork.event.SceneStepEvent;
@@ -27,6 +26,18 @@ public class AsyncArbiterNode extends ArbiterNode {
 
         executeStatePhase.state = states.currentState;
         _activePhase = executeStatePhase;
+
+        // runExecutionLoop() will be called on next step() call
+    }
+
+    public function continueExecution(playbackArbiter:PlaybackArbiterNode):void {
+        use namespace arbiter_internal;
+
+        _running = true;
+        _pausedCount = 0;
+
+        executeStatePhase.state = states.currentState;
+        _activePhase = playbackArbiter._activePhase;
 
         // runExecutionLoop() will be called on next step() call
     }
