@@ -101,6 +101,7 @@ public class RequestRecorderNode extends Node {
                     ArrayUtil.arrayCopy(playerRequests, i + 1, playerRequests, i, numMoved);
 
                 --reqCount;
+                --i;
             }
 
             playerRequests.length = reqCount;
