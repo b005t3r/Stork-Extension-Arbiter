@@ -15,14 +15,19 @@ public class PluggablePlayerNode extends PlayerNode {
 
     public function PluggablePlayerNode(name:String = "Player") {
         super(name);
-
-        addEventListener(Event.ADDED_TO_PARENT, onChildAdded);
     }
 
     public function registerPlugin(plugin:PlayerPluginNode):void { addNode(plugin); }
     public function unregisterPlugin(plugin:PlayerPluginNode):void { removeNode(plugin); }
 
     public function reevaluateActivePluginResult():* { return REEVALUATE_ACTIVE_PLUGIN_RESULT; }
+
+    public function resetActivePlugin():void {
+        if(_activePlugin != null) {
+            _activePlugin.deactivate();
+            _activePlugin = null;
+        }
+    }
 
     override public function processRequest():* {
         var count:int = nodeCount;
@@ -31,7 +36,7 @@ public class PluggablePlayerNode extends PlayerNode {
             for (var i:int = 0; i < count; ++ i) {
                 var plugin:PlayerPluginNode = getNodeAt(i) as PlayerPluginNode;
 
-                if(! plugin.canHandleRequest(request))
+                if(plugin == null || ! plugin.canHandleRequest(request))
                     continue;
 
                 // deactivate previously used plugin and activate the new one, if different from the previous one
@@ -64,13 +69,6 @@ public class PluggablePlayerNode extends PlayerNode {
 
         if(maximumIterations == 0)
             throw new Error("infinite loop detected - no plugin can handle the request");
-    }
-
-    private function onChildAdded(event:Event):void {
-        var child:Node = event.target as Node;
-
-        if(child != null && child.parentNode == this && child is PlayerPluginNode == false)
-            throw new TypeError("PluggablePlayerNode can only hold PlayerPluginNodes");
     }
 }
 }
