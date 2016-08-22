@@ -73,6 +73,21 @@ public class RequestRecorderNode extends Node {
         throw new ArgumentError("request for index " + _requestIndex + " not found for player '" + player.name + "'");
     }
 
+    public function getLastPlayerName():String {
+        for(var playerName:String in _requests) {
+            if(! _requests.hasOwnProperty(playerName) || playerName == "requestCount")
+                continue;
+
+            var playerRequests:Array = _requests[playerName];
+            var requestWrapper:Object = playerRequests[playerRequests.length - 1];
+
+            if(_requests.requestCount - 1 == requestWrapper.index)
+                return playerName;
+        }
+
+        return null; // should never happen
+    }
+
     public function trimLastRequests(count:int):void {
         if(count > _requests.requestCount)
             count = _requests.requestCount;
