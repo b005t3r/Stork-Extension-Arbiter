@@ -88,6 +88,16 @@ public class RequestRecorderNode extends Node {
         return null; // should never happen
     }
 
+    public function getLastRequestIndexForPlayer(playerName:String):int {
+        if(! _requests.hasOwnProperty(playerName) || playerName == "requestCount")
+            return -1;
+
+        var playerRequests:Array = _requests[playerName];
+        var requestWrapper:Object = playerRequests[playerRequests.length - 1];
+
+        return requestWrapper.index;
+    }
+
     public function trimLastRequests(count:int):void {
         if(count > _requests.requestCount)
             count = _requests.requestCount;
