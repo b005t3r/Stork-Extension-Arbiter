@@ -27,7 +27,7 @@ public class PlaybackArbiterNode extends ArbiterNode {
         if(! super.shouldExecuteNextPhase())
             return false;
 
-        if(_activePhase != executeStatePhase)
+        if(_activePhase != sendRequestPhase)
             return true;
 
         var processedAll:Boolean = _requestsToProcessCount >= 0 && _requestRecorder.requestIndex >= _requestsToProcessCount;
