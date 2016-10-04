@@ -79,6 +79,10 @@ public class RequestRecorderNode extends Node {
                 continue;
 
             var playerRequests:Array = _requests[playerName];
+
+            if(playerRequests.length == 0)
+                continue;
+
             var requestWrapper:Object = playerRequests[playerRequests.length - 1];
 
             if(_requests.requestCount - 1 == requestWrapper.index)
